@@ -21,7 +21,8 @@
 #root {
   min-height: 100vh;
   display: flex;
-  background: var(--background-image) center;
+  background: var(--background-image);
+  background-position: center;
   background-image: no-repeat;
   background-size: cover;
   position: relative;
@@ -140,6 +141,10 @@ a {
 
 @media (hover:hover) {
   button {
+    cursor: pointer;
+  }
+
+  header {
     cursor: pointer;
   }
 }
