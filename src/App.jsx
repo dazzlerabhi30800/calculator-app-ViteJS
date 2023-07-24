@@ -11,6 +11,7 @@ function App() {
     sign: "",
     num: 0,
     res: 0,
+    his: 0,
   });
 
   const handleTheme = () => {
@@ -43,7 +44,7 @@ function App() {
         <div className="circle"></div>
       </header>
       <main className="rounded-sm">
-        <Screen value={calc.num ? calc.num : calc.res} />
+        <Screen value={calc.num ? calc.num : calc.res} his={calc.his} />
         <Functions setCalc={setCalc} calc={calc} />
       </main>
     </>
