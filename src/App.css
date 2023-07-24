@@ -7,21 +7,66 @@
 }
 
 :root {
-  --Very-dark-desaturated-blue-1: hsl(222, 26%, 31%);
-  --Very-dark-desaturated-blue-2: hsl(223, 31%, 20%);
-  --Very-dark-desaturated-blue-3: hsl(224, 36%, 15%);
+  --background-image: url('/bg.jpg');
+  --main-background: rgba(35, 31, 62, 0.789);
   --button-shadow-color: #33f68e;
+  --font-color: #fff;
+  --toggle-background: rgba(106, 103, 103, 0.85);
+  --inner-screen: #0323474c;
+  --toggle-circle: rgb(188, 246, 230);
+  --button-background: rgb(19, 17, 34);
   --font-Poppins: 'Poppins', sans-serif;
 }
 
 #root {
   min-height: 100vh;
   display: flex;
-  background: url('/bg.jpg') center;
+  background: var(--background-image) center;
   background-image: no-repeat;
   background-size: cover;
+  position: relative;
   font-family: var(--font-Poppins);
+  transition: 0.3s ease;
 
+}
+
+body.light {
+  #root {
+    --background-image: url('/bg-light.jpg');
+    --main-background: rgba(176, 176, 176, 0.789);
+    --button-shadow-color: #33f68e;
+    --font-color: #222121;
+    --toggle-background: rgba(255, 255, 255, 0.85);
+    --inner-screen: #7bb9ff4c;
+    --toggle-circle: rgb(245, 26, 212);
+    --button-background: rgb(246, 246, 247);
+  }
+}
+
+header {
+  position: absolute;
+  display: flex;
+  top: 10px;
+  right: 10px;
+  width: 80px;
+  height: 30px;
+  border-radius: 30px;
+  padding: 5px 8px 10px;
+  background: var(--toggle-background);
+  transition: 0.4s linear;
+}
+
+
+.circle {
+  background: var(--toggle-circle);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: 0.3s linear;
+}
+
+body.light .circle {
+  transform: translateX(45px);
 }
 
 
@@ -29,9 +74,9 @@ main {
   width: 100%;
   height: 100vh;
   max-width: 700px;
-  background: rgba(35, 31, 62, 0.789);
+  background: var(--main-background);
   backdrop-filter: blur(15px);
-  color: #fff;
+  color: var(--font-color);
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -45,7 +90,7 @@ main {
   flex-basis: 10%;
   font-weight: 700;
   text-align: right;
-  background: #0323474c;
+  background: var(--inner-screen);
   border-radius: 5px 5px 0 0;
 }
 
@@ -70,8 +115,8 @@ main {
   border: none;
   outline: none;
   font-size: 1.4rem;
-  color: #fff;
-  background: rgb(19, 17, 34);
+  color: var(--font-color);
+  background: var(--button-background);
   transition: 0.2s linear;
 }
 
@@ -125,4 +170,14 @@ a {
     padding: 27px;
   }
 
+}
+
+
+@media Screen and (max-width: 700px) {
+  header {
+    z-index: 444;
+    left: 10px;
+    top: 15px;
+    transform: scale(0.7);
+  }
 }
