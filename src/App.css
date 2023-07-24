@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --Very-dark-desaturated-blue-1: hsl(222, 26%, 31%);
+  --Very-dark-desaturated-blue-2: hsl(223, 31%, 20%);
+  --Very-dark-desaturated-blue-3: hsl(224, 36%, 15%);
+  --button-shadow-color: #33f68e;
+  --font-Poppins: 'Poppins', sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  background: url('/bg.jpg') center;
+  background-image: no-repeat;
+  background-size: cover;
+  font-family: var(--font-Poppins);
+
+}
+
+
+main {
+  width: 100%;
+  height: 100vh;
+  max-width: 700px;
+  background: rgba(35, 31, 62, 0.789);
+  backdrop-filter: blur(15px);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+
+.inner-screen {
+  padding: 30px;
+  position: relative;
+  font-size: 1.6rem;
+  flex-basis: 10%;
+  font-weight: 700;
+  text-align: right;
+  background: #0323474c;
+  border-radius: 5px 5px 0 0;
+}
+
+
+
+.button--wrapper {
+  display: grid;
+  padding: 25px;
+  grid-template-columns: repeat(4, 1fr);
+  flex: 1;
+  gap: 1rem;
+  place-items: center;
+}
+
+
+.btn {
+  border-radius: 20px;
+  padding: 10px 14px;
+  height: 60%;
+  width: 100%;
+  box-shadow: 1.5px 1.5px 0px 1.5px var(--button-shadow-color);
+  border: none;
+  outline: none;
+  font-size: 1.4rem;
+  color: #fff;
+  background: rgb(19, 17, 34);
+  transition: 0.2s linear;
+}
+
+.func {
+  --button-shadow-color: #f35779;
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translate(2px, 4px);
+}
+
+
+button,
+button:active,
+a:active,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+@media (hover:hover) {
+  button {
+    cursor: pointer;
+  }
+}
+
+
+@media Screen and (min-width: 700px) {
+  #root {
+    justify-content: center;
+    align-items: center;
+  }
+
+  main {
+    height: fit-content;
+  }
+
+  .inner-screen {
+    flex-basis: 100%;
+  }
+
+  .button--wrapper {
+    place-items: start;
+  }
+
+  .btn {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 27px;
+  }
+
+}
