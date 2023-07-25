@@ -2,15 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
 import Screen from "./Components/Screen";
 import Functions from "./Components/Functions";
-import { ReduceContext } from "./Context/ReducerContext";
+import { ReduceContext, Actions } from "./Context/ReducerContext";
 
 function App() {
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem("theme")) || "dark"
   );
 
-  const { data, dispatch } = useContext(ReduceContext);
-  console.log(data);
+  const { dispatch } = useContext(ReduceContext);
 
   const handleTheme = () => {
     if (theme === "light") {
@@ -41,7 +40,7 @@ function App() {
       <header onClick={handleTheme}>
         <div className="circle"></div>
       </header>
-      <button onClick={() => dispatch({ type: "ChangeValue" })}>click</button>
+
       <main className="rounded-sm">
         <Screen />
         <Functions />

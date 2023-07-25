@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ReduceContext, formatOperand } from "../Context/ReducerContext";
 
-const Screen = ({ value, his }) => {
-  const toLocaleString = (num) =>
-    String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1,");
+const Screen = () => {
+  const {
+    data: { currentOperand, operand, previousOperand },
+  } = useContext(ReduceContext);
+
   return (
     <div className="screen ">
-      <div className="inner-screen">{value ? toLocaleString(value) : 0}</div>
-      <div className="previous">{his ? toLocaleString(his) : 0}</div>
+      <div className="inner-screen">
+        {currentOperand ? formatOperand(currentOperand) : 0}
+      </div>
+      <div className="previous">
+        {previousOperand ? formatOperand(previousOperand) : 0}{" "}
+        {operand ? operand : ""}
+      </div>
     </div>
   );
 };
