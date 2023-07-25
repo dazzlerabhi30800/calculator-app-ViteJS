@@ -34,6 +34,8 @@ export const ReducerContextProvider = ({ children }) => {
           };
         }
         if (payload.digit === "0" && state.currentOperand === "0") return state;
+        if (payload.digit === "." && state.currentOperand === null)
+          return state;
         if (payload.digit === "." && state.currentOperand.includes("."))
           return state;
         return {
@@ -54,16 +56,17 @@ export const ReducerContextProvider = ({ children }) => {
         }
 
         if (state.currentOperand === null) {
+          console.log("hello");
           return {
             ...state,
-            operation: payload.operation,
+            operand: payload.operand,
           };
         }
 
         return {
           ...state,
           previousOperand: evaluate(state),
-          operation: payload.operation,
+          operand: payload.operand,
           currentOperand: null,
         };
 
@@ -93,8 +96,9 @@ export const ReducerContextProvider = ({ children }) => {
 
       case Actions.EVALUATE:
         if (
-          (state.operation === null || state.currentOperand === null,
-          state.previousOperand === null)
+          state.operand === null ||
+          state.currentOperand === null ||
+          state.previousOperand === null
         ) {
           return state;
         }
