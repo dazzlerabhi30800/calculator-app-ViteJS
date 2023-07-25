@@ -26,6 +26,7 @@ export const ReducerContextProvider = ({ children }) => {
   const stateReducer = (state, { type, payload }) => {
     switch (type) {
       case Actions.ADD_DIGIT:
+        if (state.overwrite && payload.digit === ".") return state;
         if (state.overwrite) {
           return {
             ...state,
@@ -33,30 +34,32 @@ export const ReducerContextProvider = ({ children }) => {
             overwrite: false,
           };
         }
-        if (payload.digit === "0" && state.currentOperand === "0") return state;
-        if (payload.digit === "." && state.currentOperand === null)
+        if (state.currentOperand === "0" && payload.digit === "0") return state;
+        if (state.currentOperand === null && payload.digit === ".") {
           return state;
-        if (payload.digit === "." && state.currentOperand.includes("."))
+        }
+        if (payload.digit === "." && state.currentOperand.includes(".")) {
           return state;
+        }
+
         return {
           ...state,
           currentOperand: `${state.currentOperand || ""}${payload.digit}`,
         };
+
       case Actions.CHOOSE_OPERATION:
-        if (state.currentOperand === null && state.previousOperand === null) {
+        if (state.currentOperand === null && state.previousOperand === null)
           return state;
-        }
-        if (state.previousOperand === null || !state.previousOperand) {
+        if (state.previousOperand === null && !state.previousOperand) {
           return {
             ...state,
-            operand: payload.operand,
             previousOperand: state.currentOperand,
+            operand: payload.operand,
             currentOperand: null,
           };
         }
 
         if (state.currentOperand === null) {
-          console.log("hello");
           return {
             ...state,
             operand: payload.operand,
@@ -70,25 +73,22 @@ export const ReducerContextProvider = ({ children }) => {
           currentOperand: null,
         };
 
-      case Actions.CLEAR:
-        return {
-          previousOperand: null,
-          currentOperand: null,
-          operand: null,
-        };
-
       case Actions.DELETE_DIGIT:
         if (state.overwrite) {
           return {
             ...state,
-            overwrite: false,
             currentOperand: null,
+            overwrite: false,
           };
         }
         if (state.currentOperand === null) return state;
         if (state.currentOperand.length === 1) {
-          return { ...state, currentOperand: null };
+          return {
+            ...state,
+            currentOperand: null,
+          };
         }
+
         return {
           ...state,
           currentOperand: state.currentOperand.slice(0, -1),
@@ -96,22 +96,27 @@ export const ReducerContextProvider = ({ children }) => {
 
       case Actions.EVALUATE:
         if (
-          state.operand === null ||
           state.currentOperand === null ||
-          state.previousOperand === null
+          state.previousOperand === null ||
+          state.operand === null
         ) {
           return state;
         }
 
         return {
           ...state,
+          currentOperand: evaluate(state),
           previousOperand: null,
           operand: null,
-          currentOperand: evaluate(state),
           overwrite: true,
         };
-      default:
-        return state;
+      case Actions.CLEAR:
+        return {
+          ...state,
+          currentOperand: null,
+          previousOperand: null,
+          operand: null,
+        };
     }
   };
 

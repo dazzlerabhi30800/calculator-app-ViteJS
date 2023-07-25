@@ -12,8 +12,13 @@ const Screen = () => {
         {currentOperand ? formatOperand(currentOperand) : 0}
       </div>
       <div className="previous">
-        {previousOperand ? formatOperand(previousOperand) : 0}{" "}
+        {previousOperand ? formatOperand(previousOperand) : ""}{" "}
         {operand ? operand : ""}
+        {currentOperand
+          ? formatOperand(currentOperand)
+          : previousOperand
+          ? ""
+          : 0}
       </div>
     </div>
   );
